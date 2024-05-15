@@ -102,7 +102,7 @@ function App() {
           />
           <label htmlFor="symbols">Include Symbols</label>
         </div>
-        <StrengthMeter strength={strength} />
+        <StrengthMeter strength={strength} password={password} />
         <GenerateButton
           isDisabled={isDisabled}
           handleGeneratePassword={handleGeneratePassword}

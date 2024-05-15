@@ -2,15 +2,16 @@ import Levelbar from "./Levelbar";
 
 interface IStrengthMeter {
   strength: number;
+  password: string;
 }
 
 type Str = {
   [key: number]: string;
 };
 
-const StrengthMeter = ({ strength }: IStrengthMeter) => {
+const StrengthMeter = ({ strength, password }: IStrengthMeter) => {
   const strText: Str = {
-    0: "",
+    0: "too weak",
     1: "too weak",
     2: "weak",
     3: "medium",
@@ -18,7 +19,7 @@ const StrengthMeter = ({ strength }: IStrengthMeter) => {
   };
 
   const color: Str = {
-    0: "",
+    0: "red",
     1: "red",
     2: "orange",
     3: "yellow",
@@ -29,13 +30,25 @@ const StrengthMeter = ({ strength }: IStrengthMeter) => {
       <div className="uppercase text-grey font-semibold">Strength</div>
       <div className="flex items-center md:gap-4 gap-3">
         <h4 className="uppercase text-almost-white md:text-2xl text-xl font-bold">
-          {strText[strength]}
+          {password && strText[strength]}
         </h4>
         <div className="flex gap-2">
-          <Levelbar color={color[strength]} isFilled={strength >= 1} />
-          <Levelbar color={color[strength]} isFilled={strength >= 2} />
-          <Levelbar color={color[strength]} isFilled={strength >= 3} />
-          <Levelbar color={color[strength]} isFilled={strength >= 4} />
+          <Levelbar
+            color={color[strength]}
+            isFilled={!!password && strength >= 0}
+          />
+          <Levelbar
+            color={color[strength]}
+            isFilled={!!password && strength >= 2}
+          />
+          <Levelbar
+            color={color[strength]}
+            isFilled={!!password && strength >= 3}
+          />
+          <Levelbar
+            color={color[strength]}
+            isFilled={!!password && strength >= 4}
+          />
         </div>
       </div>
     </div>
